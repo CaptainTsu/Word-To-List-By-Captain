@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Words List Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 150px; }
+        button { margin-top: 10px; padding: 10px 20px; }
+        pre { background-color: #f4f4f4; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<h1>JavaScript Bad Words List Generator</h1>
+<p>Enter your words or phrases (one per line):</p>
+<textarea id="inputWords" placeholder="Enter words or phrases here..."></textarea>
+<br>
+<button onclick="generateList()">Generate JavaScript List</button>
+
+<h2>Generated JavaScript List:</h2>
+<pre id="outputList"></pre>
+
+<script>
+function generateList() {
+    // Get the user input
+    const inputWords = document.getElementById('inputWords').value;
+
+    // Split input by new lines, filter out empty lines, and escape single quotes
+    const wordsArray = inputWords.split('\n').map(word => word.trim()).filter(word => word)
+        .map(word => `'${word.replace(/'/g, "\\'")}'`);
+
+    // Generate JavaScript array syntax
+    const jsArray = `const bannedWords = [\n    ${wordsArray.join(',\n    ')}\n];`;
+
+    // Display the output
+    document.getElementById('outputList').textContent = jsArray;
+}
+</script>
+
+</body>
+</html>
